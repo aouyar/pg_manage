@@ -1,0 +1,5 @@
+restore_command = '/usr/local/bin/pg_manage.pl -l -c xlog_restore -s node1 -I 15 -w 60 -f %f -p %p -r %r'
+standby_mode = 'on'
+primary_conninfo = 'host=10.0.0.1 port=5432 user=postgres password=********'
+trigger_file = '/var/lib/pgsql/9.0/data/recovery.trigger'
+

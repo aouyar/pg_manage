@@ -1,0 +1,10 @@
+SERVERTYPE=SECONDARY            # Server Type (PRIMARY or SECONDARY)
+PRIMARYHOST=10.0.0.1            # Primary Server IP in Warm Standby Setup.
+SECONDARYHOST=10.0.0.2          # Secondary Server IP in Warm Standby Setup.
+
+BACKUPURLHOT=cifs:///home/nas   # Destination for Hot Backups
+BACKUPURLARCH=cifs:///home/nas  # Destination for Archive Logs
+BACKUPURLDUMP=cifs:///home/nas  # Destination for Dumps
+BACKUPDIRHOT=pg_hotbackup
+BACKUPDIRARCH=pg_archlog
+BACKUPDIRDUMP=pg_export

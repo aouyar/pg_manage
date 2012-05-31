@@ -1,0 +1,3 @@
+restore_command = '/usr/local/bin/pg_manage.pl -l -c xlog_restore -s node1 -f %f -p %p -r %r'
+recovery_target_time = '2010-09-24 01:00:00 COT'
+
