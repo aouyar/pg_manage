@@ -7,8 +7,10 @@
 #
 # Used by operator for backup and recovery tasks.
 #
-# Author: Ali Onur Uyar
-
+# Author:    Ali Onur Uyar
+# Email:     aouyar@gmail.com
+# Copyright: 2011, Ali Onur Uyar
+# License:   GPLv3
 
 
 # Includes

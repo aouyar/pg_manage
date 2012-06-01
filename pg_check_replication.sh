@@ -1,4 +1,12 @@
 #!/bin/sh
+#
+# Shell script for checking the replication between the primary and secondary
+# PostgreSQL Servers in a Streaming Replication Setup.
+#
+# Author:    Ali Onur Uyar
+# Email:     aouyar@gmail.com
+# Copyright: 2011, Ali Onur Uyar
+# License:   GPLv3
 
 source /var/lib/pgsql/9.0/pg_manage.conf
 
