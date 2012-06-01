@@ -231,7 +231,7 @@ if ($hostname =~ /^([\w\-]+)\..*/) {
 }
 
 # Initialize Date
-my $curDate = &GetDate();
+my $uniqTimestamp = &GetUniqueTimestamp();
 
 # Initialize Globals
 my $backupDirArchHost;
@@ -516,7 +516,7 @@ sub OperDBhotBackup() {
 	
 	$dbstatus = &PGcheckDBstatus();
 	if ($dbstatus) {
-		if (not &PGqueryStartBackup("", "Hot Backup $curDate")) {
+		if (not &PGqueryStartBackup("", "Hot Backup $uniqTimestamp")) {
 			warn "ERROR: Failure in configuration of PostgreSQL Database for startup of Hot Backup.\nHot Backup Cancelled\n";
 			return 0;
 		}
@@ -615,7 +615,7 @@ sub OperDBinitSync() {
 
 	printf "POSTGRESQL DATABASE - INITIAL SYNC - START - %s\n\n", &GetTimestamp();
 	
-	if (not &PGqueryStartBackup($primaryHost, "Hot Backup $curDate")) {
+	if (not &PGqueryStartBackup($primaryHost, "Hot Backup $uniqTimestamp")) {
 		warn "ERROR: Failure in configuration of PostgreSQL Database on remote host $primaryHost for startup of Hot Copy.\nHot Backup Cancelled\n";
 		return 0;
 	}
@@ -1218,7 +1218,7 @@ sub PGqueryStopBackup() {
 sub PGbackupDB() {
 	my $ret;
 	my $syscmd;
-	my $backupFilename = "hotbackup-$hostname-$curDate.tgz";
+	my $backupFilename = "hotbackup-$hostname-$uniqTimestamp.tgz";
 	my $backupFilePath = $backupLocHot{'dir'} . '/' . "$backupDirHotHost/$backupFilename";
 
 	if ($backupLocHot{'type'} eq 'ssh') {
@@ -1355,7 +1355,7 @@ sub PGrsyncDB() {
 sub PGdumpDB() {
 	my $ret;
 	my $syscmd;
-	my $backupFilename = "$hostname-$dbName-bin-$curDate.dump";
+	my $backupFilename = "$hostname-$dbName-bin-$uniqTimestamp.dump";
 	my $backupFilePath = $backupLocDump{'dir'} . '/' . "$backupDirDumpHost/$backupFilename";
 
 	if ($backupLocDump{'type'} eq 'ssh') {
@@ -1673,4 +1673,11 @@ sub GetWeekDay() {
 }
 
 
+# Get Unique Timestamp with Random Suffix
+
+sub GetUniqueTimestamp() {
+	return sprintf("%s_%s", 
+	               strftime("%Y-%m-%d_%H%M", localtime()), 
+	               sprintf("%06x\n", int(rand(hex("0xffffff")))));
+}
 
